@@ -16,9 +16,11 @@ showHideMobNavLinksResize();
 
 // NAV BAR EVENT LISTENERS
 // SROLL TO TOP BTN EVENT
+// HERO IMAGE OPACITI TXT EVENT LISTENER
 window.onscroll = function () {
   navResize();
   showHideToTopBtn();
+  heroTxtOpacity();
 };
 
 burgerBtn.addEventListener('click', function () {
@@ -28,11 +30,6 @@ burgerBtn.addEventListener('click', function () {
 window.onresize = function () {
   showHideMobNavLinksResize();
 };
-
-// HERO IMAGE TXT EVENT LISTENER
-window.addEventListener('scroll', function () {
-  heroTxtOpaciity();
-});
 
 // PRODUCTS REVIEW TAB EVENT LISTENERS
 tabOne.addEventListener('click', function () {
@@ -51,7 +48,7 @@ tabThree.addEventListener('click', function () {
 // NAV BAR RESIZE FUNCTION
 function navResize() {
   if (document.documentElement.scrollTop > 60 && window.innerWidth > 800) {
-    navBar.style.backgroundColor = '#423a44';
+    navBar.style.backgroundColor = '#3e3a37';
     navBar.style.height = '45px';
   } else {
     navBar.style.backgroundColor = 'rgba(0, 0, 0, 0)';
@@ -94,14 +91,14 @@ function showHideMobNavLinksResize() {
 // TO TOP BTN SHOW HIDE FUNCTION
 function showHideToTopBtn() {
   if (document.documentElement.scrollTop > 100) {
-    scrollToTopBtn.style.opacity = '100';
+    scrollToTopBtn.style.opacity = '1';
   } else {
     scrollToTopBtn.style.opacity = '0';
   }
 }
 
 // HERO IMAGE TXT OPACITY ON SCROLL FUNCTION
-function heroTxtOpaciity() {
+function heroTxtOpacity() {
   if (window.pageYOffset > 0) {
     let opac = 1 - window.pageYOffset / 0.75 / mainContentOffsetTop;
     heroImgContent.style.opacity = opac;
