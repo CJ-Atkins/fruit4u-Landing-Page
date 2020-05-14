@@ -14,6 +14,7 @@ const navBar = document.querySelector('nav'),
 // INITIAL PAGE LOAD
 showHideMobNavLinksResize();
 
+//
 // NAV BAR EVENT LISTENERS
 // SROLL TO TOP BTN EVENT
 // HERO IMAGE OPACITI TXT EVENT LISTENER
@@ -21,6 +22,7 @@ window.onscroll = function () {
   navResize();
   showHideToTopBtn();
   heroTxtOpacity();
+  console.log(isScrolled);
 };
 
 burgerBtn.addEventListener('click', function () {
@@ -31,6 +33,7 @@ window.onresize = function () {
   showHideMobNavLinksResize();
 };
 
+//
 // PRODUCTS REVIEW TAB EVENT LISTENERS
 tabOne.addEventListener('click', function () {
   productTabSelect(event, '#apple-content');
@@ -56,6 +59,7 @@ function navResize() {
   }
 }
 
+//
 // PRODUCT REVIEWS TAB FUNCTION
 function productTabSelect(event, product) {
   const tabContent = document.querySelectorAll('.products-review-tabs-content'),
@@ -79,6 +83,7 @@ function openCloseMobNavLinks() {
   }
 }
 
+//
 // MOBILE NAV SHOW HIDE LINKS FUNCTION (WINDOW RESIZE)
 function showHideMobNavLinksResize() {
   if (window.innerWidth > 800) {
@@ -88,19 +93,53 @@ function showHideMobNavLinksResize() {
   }
 }
 
+//
 // TO TOP BTN SHOW HIDE FUNCTION
+let isScrolled = false;
+
 function showHideToTopBtn() {
-  if (document.documentElement.scrollTop > 100) {
-    scrollToTopBtn.style.opacity = '1';
-  } else {
-    scrollToTopBtn.style.opacity = '0';
+  if (document.documentElement.scrollTop >= 150 && isScrolled === false) {
+    fadeIn(scrollToTopBtn, 'flex');
+    isScrolled = true;
+  } else if (document.documentElement.scrollTop < 150 && isScrolled === true) {
+    fadeOut(scrollToTopBtn);
+    isScrolled = false;
   }
 }
 
+//
 // HERO IMAGE TXT OPACITY ON SCROLL FUNCTION
 function heroTxtOpacity() {
   if (window.pageYOffset > 0) {
     let opac = 1 - window.pageYOffset / 0.75 / mainContentOffsetTop;
     heroImgContent.style.opacity = opac;
   }
+}
+
+//
+// FADE IN FUNCTION
+function fadeIn(element, displayType) {
+  let op = 0; // initial opacity
+  element.style.display = displayType;
+  const timer = setInterval(function () {
+    if (op >= 0.9) {
+      clearInterval(timer);
+    }
+    op += 0.1;
+    element.style.opacity = op;
+  }, 20);
+}
+
+//
+// FADE OUT FUNCTION
+function fadeOut(element) {
+  let op = 1; // initial opacity
+  const timer = setInterval(function () {
+    if (op <= 0.1) {
+      clearInterval(timer);
+      element.style.display = 'none';
+    }
+    op -= 0.1;
+    element.style.opacity = op;
+  }, 20);
 }
